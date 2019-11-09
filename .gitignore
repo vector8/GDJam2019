@@ -1,2 +1,6 @@
 GDJam2019/Library/
 GDJam2019/Temp/
+GDJam2019/obj/
+*.csproj
+*.sln
+GDJam2019/.vs/
