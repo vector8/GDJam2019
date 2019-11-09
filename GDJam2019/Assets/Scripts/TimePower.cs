@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class TimePower : MonoBehaviour
 {
-    
+     [SerializeField]
+    float startTime = 120.0f;
     [SerializeField]
     float drainRestoreSpeed = 10f;
-
+   
     private float _currentTime;
 
-
+    private void Start()
+    {
+        _currentTime = startTime;
+    }
     public  string  GetCurrentTimeFormatted()
     {
         return  formatTime(_currentTime);

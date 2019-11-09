@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimeContainer : MonoBehaviour
 {
     [SerializeField]
-    float maxTime;
+    float maxTime = 30.0f;
     [SerializeField]
     bool isRestored = false;
 

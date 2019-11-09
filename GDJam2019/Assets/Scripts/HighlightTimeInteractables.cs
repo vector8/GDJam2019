@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class HighlightTimeInteractables : MonoBehaviour
 {
-    private List<Outline> outlines = new List<Outline>();
 
+    
+    private List<Outline> outlines = new List<Outline>();
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,15 @@ public class HighlightTimeInteractables : MonoBehaviour
                 o.enabled = true;
 
                 outlines.Add(o);
+
+                if (Input.GetMouseButton(0))
+                {
+                    GetComponent<TimePower>().DrainObject(hit.transform.gameObject.GetComponent<TimeContainer>());
+                }else if (  Input.GetMouseButton(1))
+                {
+                    GetComponent<TimePower>().RestoreObject(hit.transform.gameObject.GetComponent<TimeContainer>());
+                }
+
             }
         }
     }
