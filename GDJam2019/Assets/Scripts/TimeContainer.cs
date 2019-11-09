@@ -9,37 +9,42 @@ public class TimeContainer : MonoBehaviour
     [SerializeField]
     bool isRestored = false;
 
-    float _currentTime = 0;
+    float currentTime { get; set; }
     // Start is called before the first frame update
     private void Start()
     {
-           _currentTime = isRestored ? maxTime : 0.0f ;
+           currentTime = isRestored ? maxTime : 0.0f ;
     }
-    public void Drain(ref float  amount)
+    public void Drain( ref float  amount)
     {
         isRestored = false;
-        if (_currentTime - amount > 0)
+        if (currentTime - amount > 0)
         {
-            _currentTime -= amount;
+            currentTime -= amount;
 
         }
-        else if (_currentTime - amount <= 0)
+        else if (currentTime - amount <= 0)
         {
-            amount =  _currentTime;
-            _currentTime = 0;
+            amount =  currentTime;
+            currentTime = 0;
         }
     }
     public void Restore( ref float amount)
     {
-        if (_currentTime+amount<maxTime)
+        if (currentTime+amount<maxTime)
         {
-            _currentTime += amount;
+            currentTime += amount;
 
-        }else if (_currentTime+amount>=maxTime)
+        }else if (currentTime+amount>=maxTime)
         {
-            amount = (maxTime - _currentTime);
-            _currentTime = maxTime;
+            amount = (maxTime - currentTime);
+            currentTime = maxTime;
             isRestored = true;
         }
+    }
+
+    public float GetMaxTime()
+    {
+        return maxTime;
     }
 }
