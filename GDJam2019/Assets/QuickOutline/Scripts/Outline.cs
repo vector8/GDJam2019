@@ -95,7 +95,6 @@ public class Outline : MonoBehaviour
 
     void Awake()
     {
-
         // Cache renderers
         renderers = GetComponentsInChildren<Renderer>();
 
@@ -159,6 +158,7 @@ public class Outline : MonoBehaviour
             if (first && disableOnAwake)
             {
                 enabled = false;
+                first = false;
             }
         }
     }
