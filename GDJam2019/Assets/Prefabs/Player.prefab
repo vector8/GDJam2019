@@ -303,7 +303,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e3abadb6fe7704998c6ee066423c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startTime: 120
   drainRestoreSpeed: 10
+  emergencyPercentage: 0.2
+  vignette: {fileID: 0}
+  gradient:
+    m_PersistentCalls:
+      m_Calls: []
+  playerDeath: {fileID: 1727106742}
+  controller: {fileID: 2872312423566918620}
 --- !u!114 &2872312423156345747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2f5735b3f9eef4a933f6dfed27b979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blendShapeChangeSpeed: 10
 --- !u!1 &2872312423556691518
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +337,8 @@ GameObject:
   - component: {fileID: 2872312423557542940}
   - component: {fileID: 2872312423563634748}
   - component: {fileID: 2872312423568008826}
+  - component: {fileID: 1727106737}
+  - component: {fileID: 1727106742}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -408,3 +419,35 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872312423556691518}
   m_Enabled: 1
+--- !u!95 &1727106737
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872312423556691518}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 908b2438a395a9245a3244128bd4948b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1727106742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872312423556691518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f59044200b00a848b01cb665c27e18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animation: {fileID: 1727106737}
