@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HighlightTimeInteractables : MonoBehaviour
 {
-    private List<Outline> outlines = new List<Outline>();
-
     public float blendShapeChangeSpeed = 10.0f;
-
+    
+    private List<Outline> outlines = new List<Outline>();
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +42,8 @@ public class HighlightTimeInteractables : MonoBehaviour
                     float weight = r.GetBlendShapeWeight(0);
                     weight = Mathf.Min(weight + blendShapeChangeSpeed * Time.deltaTime, 100f);
                     r.SetBlendShapeWeight(0, weight);
+
+                    GetComponent<TimePower>().DrainObject(hit.transform.gameObject.GetComponent<TimeContainer>());
                 }
                 else if (Input.GetMouseButton(1))
                 {
@@ -49,6 +51,8 @@ public class HighlightTimeInteractables : MonoBehaviour
                     float weight = r.GetBlendShapeWeight(0);
                     weight = Mathf.Max(weight - blendShapeChangeSpeed * Time.deltaTime, 0f);
                     r.SetBlendShapeWeight(0, weight);
+
+                    GetComponent<TimePower>().RestoreObject(hit.transform.gameObject.GetComponent<TimeContainer>());
                 }
             }
         }
