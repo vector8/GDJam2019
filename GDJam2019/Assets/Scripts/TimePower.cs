@@ -9,8 +9,8 @@ public class TimePower : MonoBehaviour
     float startTime = 120.0f;
     [SerializeField]
     float drainRestoreSpeed = 10f;
-    [SerializeField, Range(0f, 1f)]
-    float emergencyPercentage = 0.2f;
+    [SerializeField]//, Range(0f, 1f)]
+    float emergencyThreshold = 120f;
     [SerializeField]
     GameObject vignette;
     [SerializeField]
@@ -37,7 +37,7 @@ public class TimePower : MonoBehaviour
         }
         _doingDrainPower = false;
         _doingRestorePower = false;
-        if(_currentTime / startTime < emergencyPercentage ? true : false)
+        if(_currentTime < emergencyThreshold)
         {
             if (!_isEmergency)
             {

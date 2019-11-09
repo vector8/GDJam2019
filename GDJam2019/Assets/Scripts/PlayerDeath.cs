@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField]
-    Animator animation;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,6 @@ public class PlayerDeath : MonoBehaviour
     }
     public void KillPlayer()
     {
-        animation.SetTrigger("DeathTrigger");
+        anim.SetTrigger("DeathTrigger");
     }
 }
