@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityStandardAssets.Characters.FirstPerson;
 public class TimePower : MonoBehaviour
 {
      [SerializeField]
@@ -14,6 +15,10 @@ public class TimePower : MonoBehaviour
     GameObject vignette;
     [SerializeField]
     UnityEvent gradient;
+    [SerializeField]
+    PlayerDeath playerDeath;
+    [SerializeField]
+    FirstPersonController controller;
    
     private float _currentTime;
     private bool _doingRestorePower = false;
@@ -49,11 +54,17 @@ public class TimePower : MonoBehaviour
             vignette.SetActive(false);
             _isEmergency = false;
         }
-        
+        if (_currentTime <= 0)
+        {
+            _currentTime = 0;
+            playerDeath.KillPlayer();
+            controller.enabled = false;
+        }
+
     }
     public  string  GetCurrentTimeFormatted()
     {
-        return  formatTime(_currentTime);
+        return  FormatTime(_currentTime);
     }
 
     public void DrainObject(TimeContainer timeContainer)
@@ -84,7 +95,7 @@ public class TimePower : MonoBehaviour
     {
         return _doingDrainPower;
     }
-    public static string formatTime(double seconds)
+    public static string FormatTime(double seconds)
     {
         System.TimeSpan timespan = System.TimeSpan.FromSeconds(seconds);
         string mm = (timespan.Minutes).ToString("00");
