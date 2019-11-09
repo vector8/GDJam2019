@@ -9,7 +9,7 @@ public class TimeContainer : MonoBehaviour
     [SerializeField]
     bool isRestored = false;
 
-    float currentTime { get; set; }
+    public float currentTime { get; set; }
     // Start is called before the first frame update
     private void Start()
     {
