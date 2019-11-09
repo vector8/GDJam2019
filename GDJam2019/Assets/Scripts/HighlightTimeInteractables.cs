@@ -6,6 +6,8 @@ public class HighlightTimeInteractables : MonoBehaviour
 {
     private List<Outline> outlines = new List<Outline>();
 
+    public float blendShapeChangeSpeed = 10.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,21 @@ public class HighlightTimeInteractables : MonoBehaviour
                 o.enabled = true;
 
                 outlines.Add(o);
+
+                if(Input.GetMouseButton(0))
+                {
+                    SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
+                    float weight = r.GetBlendShapeWeight(0);
+                    weight = Mathf.Min(weight + blendShapeChangeSpeed * Time.deltaTime, 100f);
+                    r.SetBlendShapeWeight(0, weight);
+                }
+                else if (Input.GetMouseButton(1))
+                {
+                    SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
+                    float weight = r.GetBlendShapeWeight(0);
+                    weight = Mathf.Max(weight - blendShapeChangeSpeed * Time.deltaTime, 0f);
+                    r.SetBlendShapeWeight(0, weight);
+                }
             }
         }
     }
