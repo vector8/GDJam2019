@@ -19,5 +19,17 @@ public class Timer : MonoBehaviour
     void Update()
     {
         text.text = power.GetCurrentTimeFormatted();
+        if (power.UsingRestore())
+        {
+            text.color = Color.red;
+        }
+        else if(power.UsingDrain())
+        {
+            text.color = Color.blue;
+        }
+        else
+        {
+            text.color = Color.white;
+        }
     }
 }
