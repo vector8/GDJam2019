@@ -1154,6 +1154,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
+        type: 3}
+      propertyPath: vignette
+      value: 
+      objectReference: {fileID: 1038108698}
+    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
+        type: 3}
+      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1038108702}
     - target: {fileID: 2872312423556983324, guid: fa036056d7a26b347b594ff1a1ff1df2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1208,51 +1218,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: drainRestoreSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: emergencyPercentage
-      value: 0.986
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: vignette
-      value: 
-      objectReference: {fileID: 1038108698}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1038108702}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Gradient
-      objectReference: {fileID: 0}
-    - target: {fileID: 6014421978436248595, guid: fa036056d7a26b347b594ff1a1ff1df2,
-        type: 3}
-      propertyPath: gradient.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa036056d7a26b347b594ff1a1ff1df2, type: 3}

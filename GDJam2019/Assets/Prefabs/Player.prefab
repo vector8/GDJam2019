@@ -304,12 +304,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTime: 120
-  drainRestoreSpeed: 10
-  emergencyPercentage: 0.2
+  drainRestoreSpeed: 20
+  emergencyPercentage: 0.986
   vignette: {fileID: 0}
   gradient:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Gradient
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   playerDeath: {fileID: 1727106742}
   controller: {fileID: 2872312423566918620}
 --- !u!114 &2872312423156345747
@@ -324,7 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2f5735b3f9eef4a933f6dfed27b979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blendShapeChangeSpeed: 10
+  lowTimeColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+  highTimeColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &2872312423556691518
 GameObject:
   m_ObjectHideFlags: 0
