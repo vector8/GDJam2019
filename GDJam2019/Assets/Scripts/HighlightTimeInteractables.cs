@@ -39,51 +39,55 @@ public class HighlightTimeInteractables : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(ray, out hit, 2f))
         {
-            if (hit.transform.tag == "TimeInteractable")
+            if (hit.transform.tag == "TimeInteractable"|| hit.transform.tag == "Pickupable")
             {
                 Outline o = hit.transform.GetComponent<Outline>();
                 if (!outlines.Contains(o))
                     outlines.Add(o);
                 outlinesDict[o] = true;
 
-                TimeContainer tc = hit.transform.gameObject.GetComponent<TimeContainer>();
-
-                if (Input.GetMouseButton(0))
+                if (hit.transform.tag == "TimeInteractable")
                 {
-                    GetComponent<TimePower>().DrainObject(tc);
+                    TimeContainer tc = hit.transform.gameObject.GetComponent<TimeContainer>();
 
-                    SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
-                    if(r != null)
-                        r.SetBlendShapeWeight(0, (1f - tc.currentTime / tc.GetMaxTime()) * 100f);
+                    if (Input.GetMouseButton(0))
+                    {
+                        GetComponent<TimePower>().DrainObject(tc);
 
-                    takeParticles.gameObject.SetActive(tc.currentTime > 0f);
-                    giveParticles.gameObject.SetActive(false);
+                        SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
+                        if (r != null)
+                            r.SetBlendShapeWeight(0, (1f - tc.currentTime / tc.GetMaxTime()) * 100f);
 
-                    //float weight = r.GetBlendShapeWeight(0);
-                    //weight = Mathf.Min(weight + blendShapeChangeSpeed * Time.deltaTime, 100f);
-                    //r.SetBlendShapeWeight(0, weight);
+                        takeParticles.gameObject.SetActive(tc.currentTime > 0f);
+                        giveParticles.gameObject.SetActive(false);
+
+                        //float weight = r.GetBlendShapeWeight(0);
+                        //weight = Mathf.Min(weight + blendShapeChangeSpeed * Time.deltaTime, 100f);
+                        //r.SetBlendShapeWeight(0, weight);
+                    }
+                    else if (Input.GetMouseButton(1))
+                    {
+                        GetComponent<TimePower>().RestoreObject(tc);
+
+                        SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
+                        if (r != null)
+                            r.SetBlendShapeWeight(0, (1f - tc.currentTime / tc.GetMaxTime()) * 100f);
+                        //float weight = r.GetBlendShapeWeight(0);
+                        //weight = Mathf.Max(weight - blendShapeChangeSpeed * Time.deltaTime, 0f);
+                        //r.SetBlendShapeWeight(0, weight);
+
+                        giveParticles.gameObject.SetActive(tc.currentTime < tc.GetMaxTime());
+                        takeParticles.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        giveParticles.gameObject.SetActive(false);
+                        takeParticles.gameObject.SetActive(false);
+                    }
+
+
+                    o.OutlineColor = Color.Lerp(lowTimeColor, highTimeColor, tc.currentTime / tc.GetMaxTime());
                 }
-                else if (Input.GetMouseButton(1))
-                {
-                    GetComponent<TimePower>().RestoreObject(tc);
-
-                    SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
-                    if(r != null)
-                        r.SetBlendShapeWeight(0, (1f - tc.currentTime / tc.GetMaxTime()) * 100f);
-                    //float weight = r.GetBlendShapeWeight(0);
-                    //weight = Mathf.Max(weight - blendShapeChangeSpeed * Time.deltaTime, 0f);
-                    //r.SetBlendShapeWeight(0, weight);
-
-                    giveParticles.gameObject.SetActive(tc.currentTime < tc.GetMaxTime());
-                    takeParticles.gameObject.SetActive(false);
-                }
-                else
-                {
-                    giveParticles.gameObject.SetActive(false);
-                    takeParticles.gameObject.SetActive(false);
-                }
-
-                o.OutlineColor = Color.Lerp(lowTimeColor, highTimeColor, tc.currentTime / tc.GetMaxTime());
             }
 
             else
@@ -91,7 +95,7 @@ public class HighlightTimeInteractables : MonoBehaviour
                 giveParticles.gameObject.SetActive(false);
                 takeParticles.gameObject.SetActive(false);
             }
-        }
+       
 
 
             if (hit.transform.tag == "Pickupable")
@@ -104,8 +108,8 @@ public class HighlightTimeInteractables : MonoBehaviour
                     doPick = false;
                 }
             }
+        }
 
-        
         if (doPick && pickedUp == true)
         {
             pickup.TogglePickup(physicsFollowTarget);

@@ -8,9 +8,11 @@ public class Pickup : MonoBehaviour
     Rigidbody rigidbody;
     Transform target;
     [SerializeField]
-    float forceMultiplier = 20.0f;
+    float forceMultiplier = 900.0f;
     [SerializeField]
     float range = 0.5f;
+
+    bool collidingWithPlayer = false;
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -19,7 +21,7 @@ public class Pickup : MonoBehaviour
     {
         target = t;
         pickedUp = !pickedUp;
-        rigidbody.useGravity = !pickedUp;
+       // rigidbody.useGravity = !pickedUp;
         
     }
     // Update is called once per frame
@@ -31,5 +33,8 @@ public class Pickup : MonoBehaviour
            
             rigidbody.velocity = ((target.position - transform.position).normalized*forceMultiplier*Time.deltaTime)*(target.position - transform.position).magnitude;
         }
+       
     }
+   
+
 }
