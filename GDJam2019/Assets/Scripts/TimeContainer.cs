@@ -13,7 +13,11 @@ public class TimeContainer : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+
            currentTime = isRestored ? maxTime : 0.0f ;
+        SkinnedMeshRenderer r = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        if (r != null)
+            r.SetBlendShapeWeight(0, (1f - currentTime / GetMaxTime()) * 100f);
     }
     public void Drain( ref float  amount)
     {

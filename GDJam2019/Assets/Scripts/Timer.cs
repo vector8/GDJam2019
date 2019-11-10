@@ -25,11 +25,15 @@ public class Timer : MonoBehaviour
         }
         else if(power.UsingDrain())
         {
+            
             text.color = Color.blue;
+           
         }
-        else
+        else 
         {
             text.color = Color.white;
-        }
+        } 
+        power._doingDrainPower = false;
+        power._doingRestorePower = false;
     }
 }

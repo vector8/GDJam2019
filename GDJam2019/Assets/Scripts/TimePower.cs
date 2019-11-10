@@ -21,8 +21,8 @@ public class TimePower : MonoBehaviour
     FirstPersonController controller;
    
     private float _currentTime;
-    private bool _doingRestorePower = false;
-    private bool _doingDrainPower = false;
+    public bool _doingRestorePower = false;
+    public bool _doingDrainPower = false;
     private bool _isEmergency = false;
 
     private void Start()
@@ -35,8 +35,7 @@ public class TimePower : MonoBehaviour
         {
             _currentTime -= Time.deltaTime;
         }
-        _doingDrainPower = false;
-        _doingRestorePower = false;
+    
         if(_currentTime < emergencyThreshold)
         {
             if (!_isEmergency)
@@ -57,6 +56,9 @@ public class TimePower : MonoBehaviour
             playerDeath.KillPlayer();
             controller.enabled = false;
         }
+      //  _doingDrainPower = false;
+       // _doingRestorePower = false;
+
     }
     public  string  GetCurrentTimeFormatted()
     {
@@ -65,16 +67,17 @@ public class TimePower : MonoBehaviour
 
     public void DrainObject(TimeContainer timeContainer)
     {
+      
         float _drainAmount = Time.deltaTime* drainRestoreSpeed;
         timeContainer.Drain(ref _drainAmount);
         if (_drainAmount > 0)
         {
-            _doingDrainPower = true;
+              _doingDrainPower = true;
             _currentTime += _drainAmount;
         }
     }
     public void RestoreObject(TimeContainer timeContainer)
-    {
+    { 
         float _restoreAmount = Time.deltaTime * drainRestoreSpeed;
         timeContainer.Restore(ref _restoreAmount);
         if (_restoreAmount > 0)
@@ -85,6 +88,7 @@ public class TimePower : MonoBehaviour
     }
     public bool UsingRestore()
     {
+        
         return _doingRestorePower;
     }
     public bool UsingDrain()

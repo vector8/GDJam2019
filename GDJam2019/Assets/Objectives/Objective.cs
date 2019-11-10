@@ -42,25 +42,29 @@ public class Objective : MonoBehaviour
 
     public void Next(int i)
     {
-    
-        OnEndCallbacks.Invoke();
-        if (!isLast)
+        if (activated)
         {
-            if (nextObjectives != null)
+            OnEndCallbacks.Invoke();
+            if (!isLast)
             {
-                nextObjectives[i].Activate();
+                if (nextObjectives != null)
+                {
+                    nextObjectives[i].Activate();
+                }
             }
         }
     }
     public void Next()
     {
-
-        OnEndCallbacks.Invoke();
-        if (!isLast)
+        if (activated)
         {
-            if (nextObjectives != null)
+            OnEndCallbacks.Invoke();
+            if (!isLast)
             {
-                nextObjectives[0].Activate();
+                if (nextObjectives != null)
+                {
+                    nextObjectives[0].Activate();
+                }
             }
         }
     }
