@@ -5,11 +5,9 @@ using UnityEngine;
 public class HighlightTimeInteractables : MonoBehaviour
 {
     public Color lowTimeColor, highTimeColor;
-
     public Transform physicsFollowTarget;
-
     public ParticleSystem giveParticles, takeParticles;
-
+    public SoundFadeInOut timeSound;
 
     private Dictionary<Outline, bool> outlinesDict = new Dictionary<Outline, bool>();
     private List<Outline> outlines = new List<Outline>();
@@ -39,7 +37,7 @@ public class HighlightTimeInteractables : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(ray, out hit, 2f))
         {
-            if (hit.transform.tag == "TimeInteractable"|| hit.transform.tag == "Pickupable")
+            if (hit.transform.tag == "TimeInteractable" || hit.transform.tag == "Pickupable")
             {
                 Outline o = hit.transform.GetComponent<Outline>();
                 if (!outlines.Contains(o))
@@ -48,16 +46,29 @@ public class HighlightTimeInteractables : MonoBehaviour
 
                 if (hit.transform.tag == "TimeInteractable")
                 {
+
                     TimeContainer tc = hit.transform.gameObject.GetComponent<TimeContainer>();
 
                     if (Input.GetMouseButton(0))
                     {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            timeSound.Play();
+                        }
+
                         GetComponent<TimePower>().DrainObject(tc);
 
                         SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
                         if (r != null)
                             r.SetBlendShapeWeight(0, (1f - tc.currentTime / tc.GetMaxTime()) * 100f);
 
+                        if (tc.currentTime == 0f)
+                        {
+                            if (timeSound.isPlaying())
+                            {
+                                timeSound.Stop();
+                            }
+                        }
                         takeParticles.gameObject.SetActive(tc.currentTime > 0f);
                         giveParticles.gameObject.SetActive(false);
 
@@ -67,6 +78,10 @@ public class HighlightTimeInteractables : MonoBehaviour
                     }
                     else if (Input.GetMouseButton(1))
                     {
+                        if (Input.GetMouseButtonDown(1))
+                        {
+                            timeSound.Play();
+                        }
                         GetComponent<TimePower>().RestoreObject(tc);
 
                         SkinnedMeshRenderer r = hit.transform.GetComponentInChildren<SkinnedMeshRenderer>();
@@ -76,38 +91,42 @@ public class HighlightTimeInteractables : MonoBehaviour
                         //weight = Mathf.Max(weight - blendShapeChangeSpeed * Time.deltaTime, 0f);
                         //r.SetBlendShapeWeight(0, weight);
 
+                        if (tc.currentTime == tc.GetMaxTime())
+                        {
+                            if (timeSound.isPlaying())
+                            {
+                                timeSound.Stop();
+                            }
+                        }
                         giveParticles.gameObject.SetActive(tc.currentTime < tc.GetMaxTime());
                         takeParticles.gameObject.SetActive(false);
                     }
                     else
                     {
-                        giveParticles.gameObject.SetActive(false);
-                        takeParticles.gameObject.SetActive(false);
+                        stopTimeEffect();
                     }
-
 
                     o.OutlineColor = Color.Lerp(lowTimeColor, highTimeColor, tc.currentTime / tc.GetMaxTime());
                 }
-            }
-
-            else
-            {
-                giveParticles.gameObject.SetActive(false);
-                takeParticles.gameObject.SetActive(false);
-            }
-       
-
-
-            if (hit.transform.tag == "Pickupable")
-            {
-                if (doPick&&pickedUp==false)
+                else
                 {
-                    pickup = hit.transform.gameObject.GetComponent<Pickup>();
-                    pickup.TogglePickup(physicsFollowTarget);
-                    pickedUp =  true;
-                    doPick = false;
+                    stopTimeEffect();
+                    if (hit.transform.tag == "Pickupable")
+                    {
+                        if (doPick && pickedUp == false)
+                        {
+                            pickup = hit.transform.gameObject.GetComponent<Pickup>();
+                            pickup.TogglePickup(physicsFollowTarget);
+                            pickedUp = true;
+                            doPick = false;
+                        }
+                    }
                 }
             }
+        }
+        else
+        {
+            stopTimeEffect();
         }
 
         if (doPick && pickedUp == true)
@@ -121,5 +140,15 @@ public class HighlightTimeInteractables : MonoBehaviour
             o.enabled = outlinesDict[o];
         }
         doPick = false;
+    }
+
+    private void stopTimeEffect()
+    {
+        giveParticles.gameObject.SetActive(false);
+        takeParticles.gameObject.SetActive(false);
+        if (timeSound.isPlaying())
+        {
+            timeSound.Stop();
+        }
     }
 }
