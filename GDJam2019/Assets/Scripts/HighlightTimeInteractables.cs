@@ -5,11 +5,11 @@ using UnityEngine;
 public class HighlightTimeInteractables : MonoBehaviour
 {
     public Color lowTimeColor, highTimeColor;
-<<<<<<< HEAD
+
     public Transform physicsFollowTarget;
-=======
+
     public ParticleSystem giveParticles, takeParticles;
->>>>>>> 0425e6467b151405dad3cba625eb09be87f9cddc
+
 
     private Dictionary<Outline, bool> outlinesDict = new Dictionary<Outline, bool>();
     private List<Outline> outlines = new List<Outline>();
@@ -85,15 +85,14 @@ public class HighlightTimeInteractables : MonoBehaviour
 
                 o.OutlineColor = Color.Lerp(lowTimeColor, highTimeColor, tc.currentTime / tc.GetMaxTime());
             }
-<<<<<<< HEAD
-=======
+
             else
             {
                 giveParticles.gameObject.SetActive(false);
                 takeParticles.gameObject.SetActive(false);
             }
         }
->>>>>>> 0425e6467b151405dad3cba625eb09be87f9cddc
+
 
             if (hit.transform.tag == "Pickupable")
             {
@@ -106,7 +105,7 @@ public class HighlightTimeInteractables : MonoBehaviour
                 }
             }
 
-        }
+        
         if (doPick && pickedUp == true)
         {
             pickup.TogglePickup(physicsFollowTarget);
