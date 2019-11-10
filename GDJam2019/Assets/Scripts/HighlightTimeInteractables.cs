@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighlightTimeInteractables : MonoBehaviour
 {
     public Color lowTimeColor, highTimeColor;
+    public ParticleSystem giveParticles, takeParticles;
 
     private Dictionary<Outline, bool> outlinesDict = new Dictionary<Outline, bool>();
     private List<Outline> outlines = new List<Outline>();
@@ -45,6 +46,9 @@ public class HighlightTimeInteractables : MonoBehaviour
                     if(r != null)
                         r.SetBlendShapeWeight(0, (1f - tc.currentTime / tc.GetMaxTime()) * 100f);
 
+                    takeParticles.gameObject.SetActive(tc.currentTime > 0f);
+                    giveParticles.gameObject.SetActive(false);
+
                     //float weight = r.GetBlendShapeWeight(0);
                     //weight = Mathf.Min(weight + blendShapeChangeSpeed * Time.deltaTime, 100f);
                     //r.SetBlendShapeWeight(0, weight);
@@ -59,9 +63,22 @@ public class HighlightTimeInteractables : MonoBehaviour
                     //float weight = r.GetBlendShapeWeight(0);
                     //weight = Mathf.Max(weight - blendShapeChangeSpeed * Time.deltaTime, 0f);
                     //r.SetBlendShapeWeight(0, weight);
+
+                    giveParticles.gameObject.SetActive(tc.currentTime < tc.GetMaxTime());
+                    takeParticles.gameObject.SetActive(false);
+                }
+                else
+                {
+                    giveParticles.gameObject.SetActive(false);
+                    takeParticles.gameObject.SetActive(false);
                 }
 
                 o.OutlineColor = Color.Lerp(lowTimeColor, highTimeColor, tc.currentTime / tc.GetMaxTime());
+            }
+            else
+            {
+                giveParticles.gameObject.SetActive(false);
+                takeParticles.gameObject.SetActive(false);
             }
         }
 
