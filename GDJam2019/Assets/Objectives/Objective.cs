@@ -20,10 +20,12 @@ public class Objective : MonoBehaviour
     [SerializeField]
     UnityEvent OnEndCallbacks;
 
+    public bool completed =false;
     bool isLast = false;
     int numOfBranchs = 1;
     [SerializeField]
     List<Objective> nextObjectives = new List<Objective>();
+
    
   //  private string nameOfNextObjective;
   
@@ -40,7 +42,7 @@ public class Objective : MonoBehaviour
       
     }
 
-    public void Next(int i)
+    public void Complete(int i)
     {
         if (activated)
         {
@@ -51,10 +53,13 @@ public class Objective : MonoBehaviour
                 {
                     nextObjectives[i].Activate();
                 }
+
             }
+            activated = false;
+            completed = true;
         }
     }
-    public void Next()
+    public void Complete()
     {
         if (activated)
         {
@@ -66,6 +71,8 @@ public class Objective : MonoBehaviour
                     nextObjectives[0].Activate();
                 }
             }
+            activated = false;
+            completed = true;
         }
     }
     public void Activate()

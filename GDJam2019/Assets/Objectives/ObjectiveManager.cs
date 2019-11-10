@@ -10,7 +10,7 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField]
     string starterTaskName;
     string[] names;
-
+    public bool startOnPlay = true;
     public static ObjectiveManager Instance;
     // Start is called before the first frame update
     void Start()
@@ -24,9 +24,11 @@ public class ObjectiveManager : MonoBehaviour
 
            Instance = this;
 #if UNITY_STANDALONE
-        if (starter != null)
-        {
-            starter.Activate();
+        if (startOnPlay) {
+            if (starter != null)
+            {
+                starter.Activate();
+            }
         }
 #endif
 
