@@ -5,9 +5,13 @@ using UnityEngine;
 public class HighlightTimeInteractables : MonoBehaviour
 {
     public Color lowTimeColor, highTimeColor;
+    public Transform physicsFollowTarget;
 
     private Dictionary<Outline, bool> outlinesDict = new Dictionary<Outline, bool>();
     private List<Outline> outlines = new List<Outline>();
+    public bool pickedUp = false;
+    bool doPick = false;
+    private Pickup pickup;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +25,15 @@ public class HighlightTimeInteractables : MonoBehaviour
         {
             outlinesDict[o] = false;
         }
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            doPick = true;
+        }
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f));
 
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(ray, out hit, 10f))
+        if (Physics.Raycast(ray, out hit, 2f))
         {
             if (hit.transform.tag == "TimeInteractable")
             {
@@ -63,11 +70,29 @@ public class HighlightTimeInteractables : MonoBehaviour
 
                 o.OutlineColor = Color.Lerp(lowTimeColor, highTimeColor, tc.currentTime / tc.GetMaxTime());
             }
-        }
 
+            if (hit.transform.tag == "Pickupable")
+            {
+                if (doPick&&pickedUp==false)
+                {
+                    pickup = hit.transform.gameObject.GetComponent<Pickup>();
+                    pickup.TogglePickup(physicsFollowTarget);
+                    pickedUp =  true;
+                    doPick = false;
+                }
+            }
+
+        }
+        if (doPick && pickedUp == true)
+        {
+            pickup.TogglePickup(physicsFollowTarget);
+            pickedUp = false;
+            doPick = false;
+        }
         foreach (Outline o in outlines)
         {
             o.enabled = outlinesDict[o];
         }
+        doPick = false;
     }
 }

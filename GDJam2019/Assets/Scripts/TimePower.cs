@@ -9,7 +9,7 @@ public class TimePower : MonoBehaviour
     float startTime = 120.0f;
     [SerializeField]
     float drainRestoreSpeed = 10f;
-    [SerializeField]//, Range(0f, 1f)]
+    [SerializeField]
     float emergencyThreshold = 120f;
     [SerializeField]
     GameObject vignette;
@@ -44,13 +44,10 @@ public class TimePower : MonoBehaviour
                 vignette.SetActive(true);
                 gradient.Invoke();
             }
-           
             _isEmergency = true;
-
         }
         else
         {
-
             vignette.SetActive(false);
             _isEmergency = false;
         }
@@ -60,7 +57,6 @@ public class TimePower : MonoBehaviour
             playerDeath.KillPlayer();
             controller.enabled = false;
         }
-
     }
     public  string  GetCurrentTimeFormatted()
     {
@@ -100,7 +96,7 @@ public class TimePower : MonoBehaviour
         System.TimeSpan timespan = System.TimeSpan.FromSeconds(seconds);
         string mm = (timespan.Minutes).ToString("00");
         string ss = (timespan.Seconds).ToString("00");
-        string ms = (timespan.Milliseconds).ToString("000");
+        string ms = (timespan.Milliseconds/10.0f).ToString("00");
         return mm + ":" + ss + "." + ms;
     }
 
