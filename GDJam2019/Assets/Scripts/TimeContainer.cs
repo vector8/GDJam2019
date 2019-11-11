@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimeContainer : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class TimeContainer : MonoBehaviour
     float maxTime = 30.0f;
     [SerializeField]
     bool isRestored = false;
+    [SerializeField]
+    UnityEvent OnRestore;
 
     public float currentTime { get; set; }
     // Start is called before the first frame update
@@ -44,6 +47,7 @@ public class TimeContainer : MonoBehaviour
             amount = (maxTime - currentTime);
             currentTime = maxTime;
             isRestored = true;
+            OnRestore.Invoke();
         }
     }
 

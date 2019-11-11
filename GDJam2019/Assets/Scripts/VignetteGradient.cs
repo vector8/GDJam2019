@@ -7,6 +7,7 @@ public class VignetteGradient : MonoBehaviour
 {
     [SerializeField]
     float fadeInTime = 0.2f;
+
     [SerializeField]
     Image vignette;
 

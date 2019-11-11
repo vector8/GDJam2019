@@ -19,6 +19,8 @@ public class TimePower : MonoBehaviour
     PlayerDeath playerDeath;
     [SerializeField]
     FirstPersonController controller;
+    [SerializeField]
+    GameObject lose;
    
     private float _currentTime;
     public bool _doingRestorePower = false;
@@ -54,6 +56,7 @@ public class TimePower : MonoBehaviour
         {
             _currentTime = 0;
             playerDeath.KillPlayer();
+            lose.SetActive(true);
             controller.enabled = false;
         }
       //  _doingDrainPower = false;
