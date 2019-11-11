@@ -15,6 +15,12 @@ public class ObjectiveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Objective[] list;
+        list = FindObjectsOfType<Objective>();
+        for (int i = 0; i<list.Length;i++)
+        {
+            list[i].Deactivate();
+        }
 
         if (Instance != null)
            {

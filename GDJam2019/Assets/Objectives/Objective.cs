@@ -34,7 +34,7 @@ public class Objective : MonoBehaviour
 
     private void Start()
     {
-       
+
     }
 
     private void Update()
@@ -83,6 +83,10 @@ public class Objective : MonoBehaviour
     public Objective GetNext(int i)
     {
         return nextObjectives[i];
+    }
+    public void Deactivate()
+    {
+        activated = false;
     }
     public string GetName()
     {

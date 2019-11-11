@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 193051632906396600}
   - component: {fileID: 193051632906396583}
-  - component: {fileID: 193051632906396582}
   m_Layer: 0
   m_Name: Objectives
   m_TagString: Untagged
@@ -46,24 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   starter: {fileID: 0}
   starterTaskName: First Room
---- !u!114 &193051632906396582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193051632906396581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e0086898b76374c8de9a104d6cc9bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectiveName: Second Room
-  activated: 0
-  OnStartCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-  OnEndCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-  nextObjectives: []
+  startOnPlay: 1
